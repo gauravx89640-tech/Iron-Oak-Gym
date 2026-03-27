@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloom Bakery | Baked Fresh Every Morning</title>
+  <meta name="description" content="Artisan breads, pastries and cakes made with love in Austin, Texas. Visit Bloom Bakery for fresh baked goods daily.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #fdf8f3;
+      --surface: #fff9f4;
+      --accent: #a84d1c;
+      --accent-hover: #8f3f14;
+      --secondary: #e8c99a;
+      --text: #1a1108;
+      --muted: #5c4a3a;
+      --border: #eeddd0;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(45, 31, 20, 0.08);
+      --shadow-lg: 0 8px 30px rgba(45, 31, 20, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s ease;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Scroll Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(253, 248, 243, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 16px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      color: var(--muted);
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-small {
+      padding: 10px 20px;
+      font-size: 0.875rem;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .mobile-menu-btn span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(232, 201, 154, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(200, 98, 42, 0.1) 0%, transparent 50%),
+        var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e8c99a' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--muted);
+      margin-bottom: 40px;
+      font-weight: 300;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Menu Section */
+    .menu {
+      background: var(--bg);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .menu-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .menu-card-image {
+      width: 100%;
+      height: 180px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .menu-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-card:hover .menu-card-image img {
+      transform: scale(1.05);
+    }
+
+    .menu-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .menu-card-items {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .menu-card-subtitle {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    /* About Section */
+    .about {
+      background: var(--surface);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-content h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: 24px;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 24px 16px;
+      background: var(--bg);
+      border-radius: var(--radius);
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .about-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-image {
+      width: 100%;
+      max-width: 450px;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Specials Section */
+    .specials {
+      background: var(--bg);
+    }
+
+    .specials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .special-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .special-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .special-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .special-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .special-card:hover .special-image img {
+      transform: scale(1.05);
+    }
+
+    .special-content {
+      padding: 24px;
+    }
+
+    .special-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .special-content h3 {
+      font-size: 1.25rem;
+    }
+
+    .special-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .special-content p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Visit Section */
+    .visit {
+      background: var(--surface);
+    }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .visit-info h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: 32px;
+    }
+
+    .visit-details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .visit-item {
+      display: flex;
+      gap: 16px;
+    }
+
+    .visit-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .visit-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .visit-item-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .visit-item-content p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, var(--secondary) 0%, #d4b082 100%);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .map-placeholder svg {
+      width: 64px;
+      height: 64px;
+      color: var(--accent);
+      opacity: 0.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: var(--bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contact-form h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      background: var(--surface);
+      color: var(--text);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200, 98, 42, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .contact-info {
+      padding-top: 80px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .contact-method-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--surface);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-method-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent);
+    }
+
+    .contact-method p {
+      color: var(--muted);
+    }
+
+    .contact-method a {
+      color: var(--accent);
+    }
+
+    .contact-method a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.7);
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 992px) {
+      .menu-grid,
+      .specials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid,
+      .visit-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-visual {
+        order: -1;
+      }
+
+      .about-image {
+        max-width: 100%;
+        aspect-ratio: 16/9;
+      }
+
+      .contact-info {
+        padding-top: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 24px;
+        gap: 16px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .menu-grid,
+      .specials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .hero {
+        padding: 100px 0 60px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-container">
+      <a href="#" class="logo">Bloom Bakery</a>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#visit">Visit Us</a>
+        <a href="#contact" class="btn btn-primary btn-small">Order Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content reveal">
+        <h1>Baked Fresh Every Morning</h1>
+        <p>Artisan breads, pastries and cakes made with love in Austin, Texas</p>
+        <div class="hero-buttons">
+          <a href="#menu" class="btn btn-primary">View Our Menu</a>
+          <a href="#visit" class="btn btn-outline">Find Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Our Bakes</h2>
+        <p>Crafted with passion using traditional recipes and the finest ingredients</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <div class="menu-card-image">
+            <img src="/images/breads.jpg" alt="Artisan breads including sourdough, rye and focaccia">
+          </div>
+          <h3>Breads</h3>
+          <p class="menu-card-items">Sourdough, Rye, Focaccia, Whole Wheat</p>
+          <span class="menu-card-subtitle">Made fresh daily</span>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-image">
+            <img src="/images/pastries.jpg" alt="French pastries including croissants and danish">
+          </div>
+          <h3>Pastries</h3>
+          <p class="menu-card-items">Croissants, Danish, Cinnamon Rolls, Muffins</p>
+          <span class="menu-card-subtitle">Made fresh daily</span>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-image">
+            <img src="/images/cakes.jpg" alt="Celebration cakes, cheesecakes and tarts">
+          </div>
+          <h3>Cakes</h3>
+          <p class="menu-card-items">Celebration Cakes, Cheesecakes, Tarts, Brownies</p>
+          <span class="menu-card-subtitle">Made fresh daily</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content reveal">
+          <h2>Made with love since 2018</h2>
+          <p>Bloom Bakery started as a small kitchen project and grew into Austin&apos;s favourite neighbourhood bakery. Every item is made by hand using locally sourced ingredients, traditional recipes and a whole lot of love.</p>
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat-value">50+</div>
+              <div class="stat-label">Items Daily</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">Est. 2018</div>
+              <div class="stat-label">Founded</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Local Ingredients</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual reveal">
+          <div class="about-image">
+            <img src="/images/bakery-interior.jpg" alt="Inside Bloom Bakery with fresh bread on display">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specials Section -->
+  <section class="specials" id="specials">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>This Week&apos;s Specials</h2>
+        <p>Our baker&apos;s recommendations, fresh from the oven</p>
+      </div>
+      <div class="specials-grid">
+        <div class="special-card reveal">
+          <div class="special-image">
+            <img src="/images/sourdough.jpg" alt="Artisan sourdough bread loaf">
+          </div>
+          <div class="special-content">
+            <div class="special-header">
+              <h3>Sourdough Loaf</h3>
+              <span class="special-price">$8.00</span>
+            </div>
+            <p>Our signature 24hr fermented sourdough</p>
+          </div>
+        </div>
+        <div class="special-card reveal">
+          <div class="special-image">
+            <img src="/images/croissant.jpg" alt="Golden butter croissant">
+          </div>
+          <div class="special-content">
+            <div class="special-header">
+              <h3>Butter Croissant</h3>
+              <span class="special-price">$4.50</span>
+            </div>
+            <p>Flaky, buttery and baked fresh every morning</p>
+          </div>
+        </div>
+        <div class="special-card reveal">
+          <div class="special-image">
+            <img src="/images/lemon-tart.jpg" alt="Lemon tart with meringue">
+          </div>
+          <div class="special-content">
+            <div class="special-header">
+              <h3>Lemon Tart</h3>
+              <span class="special-price">$6.00</span>
+            </div>
+            <p>Zesty lemon curd in a crisp pastry shell</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit Section -->
+  <section class="visit" id="visit">
+    <div class="container">
+      <div class="visit-grid">
+        <div class="visit-info reveal">
+          <h2>Come Find Us</h2>
+          <div class="visit-details">
+            <div class="visit-item">
+              <div class="visit-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div class="visit-item-content">
+                <h4>Address</h4>
+                <p>142 Maple Street, Austin, TX 78701</p>
+              </div>
+            </div>
+            <div class="visit-item">
+              <div class="visit-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="visit-item-content">
+                <h4>Opening Hours</h4>
+                <p>Mon–Fri 7am–6pm<br>Sat–Sun 8am–4pm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map-placeholder reveal">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-form reveal">
+          <h2>Get In Touch</h2>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="How can we help?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info reveal">
+          <h3>Or reach us directly</h3>
+          <div class="contact-method">
+            <div class="contact-method-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <div>
+              <p><a href="tel:+15125550142">(512) 555-0142</a></p>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <p><a href="mailto:hello@bloombakery.com">hello@bloombakery.com</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Bloom Bakery. All rights reserved.</p>
+      <a href="https://forgestudio.one" target="_blank" rel="noopener noreferrer">Website by Forge Studio</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Scroll reveal animation
+    function reveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+
+    // Form submission (demo)
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! We\'ll get back to you soon.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
